@@ -27,11 +27,9 @@ UCARE_VERSION=(20.03.0)
 
 # Checking if the user has run the script with "sudo" or not
 if [[ $EUID -ne 0 ]] ; then
-    clear
     echo ""
     echo "uCareSystem Core must be run as root or with sudo. Now I will just exit..." 1>&2
     echo ""
-    sleep 2
     exit 1
 fi
 function WELCOME_SCREEN {
@@ -50,7 +48,10 @@ function WELCOME_SCREEN {
 	echo " kernels, obsolete packages and configuration files    "
 	echo " to free up disk space, without any need of user       "
 	echo " interference                                          "
-	echo "                   				                     "
+	echo "                   				     "
+	echo " This is a fork done by WmeLuna that just removes	     "
+	echo " the sleep commands to make this run faster            "
+	echo "                                                       "
 	echo " If you’ve found it useful and saved you time and you  "
 	echo " think it is worth of your support, you can make a     "
 	echo " donation via PayPal by clicking on the following:     "
@@ -58,9 +59,7 @@ function WELCOME_SCREEN {
 	echo "           https://www.paypal.me/cerebrux              "
 	echo "_______________________________________________________"
 	echo
-	echo " uCareSystem Core will start in 5 seconds... "
-
-	sleep 6
+	echo " uCareSystem Core will start now... "
 }
 
 function MAINTENACE {
@@ -77,7 +76,6 @@ function MAINTENACE {
 	echo "###############################"
 	echo "Finished updating package lists"
 	echo "###############################"
-	sleep 1
 
 	## Updates packages and libraries
 	sudo apt full-upgrade -y;
@@ -85,7 +83,6 @@ function MAINTENACE {
 	echo "###############################################"
 	echo "Finished updating packages and system libraries"
 	echo "###############################################"
-	sleep 1
 	echo
 
 	## Removes unneeded packages
@@ -94,7 +91,6 @@ function MAINTENACE {
 	echo "###################################"
 	echo "Finished removing unneeded packages"
 	echo "###################################"
-	sleep 1
 	echo
 
 	# purge-old-kernels - remove old kernel packages
@@ -138,7 +134,6 @@ function MAINTENACE {
 	echo "###################################"
 	echo "Finished removing old kernels"
 	echo "###################################"
-	sleep 1
 	echo
 	## Removes unused config files
 	sudo deborphan -n --find-config | xargs sudo apt-get -y --purge autoremove;
@@ -146,7 +141,6 @@ function MAINTENACE {
 	echo "#####################################"
 	echo "Finished removing unused config files"
 	echo "#####################################"
-	sleep 1
 	echo
 
 	## Removes package files that can no longer be downloaded and everything except
@@ -157,7 +151,6 @@ function MAINTENACE {
 	echo " Cleaned downloaded temporary packages"
 	echo "######################################"
 	echo
-	sleep 1
 
 	echo
 	echo "#########################################"
@@ -195,29 +188,23 @@ sudo do-release-upgrade
 }
 
 function UPGRADE_TO_NEXT_RELEASE {
-	sleep 1
 	echo "##########################################"
 	echo "uCareSystem will now check for the        "
 	echo "availabillity of the next version         "
 	echo "and it will start the upgrade             "
 	echo "##########################################"
 	echo ""
-	sleep 1
 	do-release-upgrade
-	sleep 2
 }
 
 function UPGRADE_TO_DEVEL_RELEASE {
-	sleep 1
 	echo "##########################################"
 	echo "uCareSystem will now check for the        "
 	echo "availabillity of the next development     "
 	echo "version and it will start the upgrade     "
 	echo "##########################################"
 	echo ""
-	sleep 1
 	do-release-upgrade -d
-	sleep 2
 }
 
 function SHOW_HELP {
@@ -268,7 +255,6 @@ EOF
 }
 
 function GOODBYE {
-	sleep 2
 	echo
 	echo
 	echo "#########################"
@@ -277,7 +263,6 @@ function GOODBYE {
 }
 
 function SHUT_DOWN {
-	sleep 1
 	echo
 	echo
 	echo "#########################"
@@ -287,7 +272,6 @@ function SHUT_DOWN {
 }
 
 function RE_BOOT {
-	sleep 1
 	echo
 	echo
 	echo "#########################"

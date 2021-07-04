@@ -51,12 +51,8 @@ function WELCOME_SCREEN {
 	echo "                   				     "
 	echo " This is a fork done by WmeLuna that just removes	     "
 	echo " the sleep commands to make this run faster            "
+	echo " it also uses apt-fast when possible		     "
 	echo "                                                       "
-	echo " If you’ve found it useful and saved you time and you  "
-	echo " think it is worth of your support, you can make a     "
-	echo " donation via PayPal by clicking on the following:     "
-	echo "                                                       "
-	echo "           https://www.paypal.me/cerebrux              "
 	echo "_______________________________________________________"
 	echo
 	echo " uCareSystem Core will start now... "
@@ -71,14 +67,14 @@ function MAINTENACE {
 	echo
 
 	## Updates package lists
-	sudo apt update;
+	sudo apt-fast update;
 	echo
 	echo "###############################"
 	echo "Finished updating package lists"
 	echo "###############################"
 
 	## Updates packages and libraries
-	sudo apt full-upgrade -y;
+	sudo apt-fast full-upgrade -y;
 	echo
 	echo "###############################################"
 	echo "Finished updating packages and system libraries"

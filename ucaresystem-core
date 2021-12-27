@@ -67,7 +67,7 @@ function MAINTENACE {
 	echo
 
 	## Updates package lists
-	sudo apt-fast update;
+	sudo apt-get -qq update;
 	echo
 	echo "###############################"
 	echo "Finished updating package lists"
@@ -82,7 +82,7 @@ function MAINTENACE {
 	echo
 
 	## Removes unneeded packages
-	sudo apt-get -y --purge autoremove; # Debian Jessie uses old apt. So
+	sudo apt-get -y -qq --purge autoremove; # Debian Jessie uses old apt. So
 	echo					# for the time being I use old implementation
 	echo "###################################"
 	echo "Finished removing unneeded packages"
@@ -124,7 +124,7 @@ function MAINTENACE {
 		echo "No kernels are eligible for removal"
 	fi
 
-	sudo apt $APT_OPTS remove -y --purge $PURGE;
+	sudo apt -qq $APT_OPTS remove -y --purge $PURGE;
 
 	echo
 	echo "###################################"
@@ -132,7 +132,7 @@ function MAINTENACE {
 	echo "###################################"
 	echo
 	## Removes unused config files
-	sudo deborphan -n --find-config | xargs sudo apt-get -y --purge autoremove;
+	sudo deborphan -n --find-config | xargs sudo apt-get -y -qq --purge autoremove;
 	echo
 	echo "#####################################"
 	echo "Finished removing unused config files"
@@ -141,7 +141,7 @@ function MAINTENACE {
 
 	## Removes package files that can no longer be downloaded and everything except
 	# the lock file in /var/cache/apt/archives, including directories.
-	sudo apt-get -y autoclean; sudo apt-get -y clean;
+	sudo apt-get -y -qq autoclean; sudo apt-get -y -qq clean;
 	echo
 	echo "######################################"
 	echo " Cleaned downloaded temporary packages"
@@ -178,8 +178,8 @@ deb http://old-releases.ubuntu.com/ubuntu/ $DIST_CODENAME-security main restrict
 
 EOT
 
-sudo apt-get install update-manager-core
-sudo apt-get -y dist-upgrade
+sudo apt-get -qq install update-manager-core
+sudo apt-get -qq -y dist-upgrade
 sudo do-release-upgrade
 }
 
